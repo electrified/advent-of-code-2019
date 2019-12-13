@@ -26,12 +26,17 @@ public class IntCode {
         instructionLengths.put(2, 4);
         instructionLengths.put(3, 2);
         instructionLengths.put(4, 2);
+        instructionLengths.put(5, 3);
+        instructionLengths.put(6, 3);
+        instructionLengths.put(7, 4);
+        instructionLengths.put(8, 4);
         instructionLengths.put(99, 1);
     }
 
     void runProgram() {
         Integer ip = 0;
         boolean endExecution = false;
+        boolean jump = false;
 
         while (true) {
             Integer rawInstruction = program.get(ip);
@@ -59,7 +64,6 @@ public class IntCode {
             }
 
             switch (instruction) {
-
                 case 1:
                     write( params[2], read(paramMode[0], params[0]) + read(paramMode[1], params[1]));
                     break;
@@ -72,15 +76,45 @@ public class IntCode {
                 case 4:
                     System.out.println(read(paramMode[0],params[0]));
                     break;
+                case 5:
+                    if (read(paramMode[0], params[0]) > 0) {
+                        ip = read(paramMode[1], params[1]);
+                        jump = true;
+                    }
+                    break;
+                case 6:
+                    if (read(paramMode[0], params[0]) == 0) {
+                        ip = read(paramMode[1], params[1]);
+                        jump = true;
+                    }
+                    break;
+                case 7:
+                    if(read(paramMode[0], params[0]) < read(paramMode[1], params[1])) {
+                        write( params[2], 1);
+                    } else {
+                        write( params[2], 0);
+                    }
+                    break;
+                case 8:
+                    if(read(paramMode[0], params[0]) == read(paramMode[1], params[1])) {
+                        write( params[2], 1);
+                    } else {
+                        write( params[2], 0);
+                    }
+                    break;
                 case 99:
 //                    System.out.println("Ending execution");
                     endExecution = true;
                     break;
                 default:
-                    System.out.println("an error has occurred");
+                    System.out.println(String.format("an error has occurred - unrecognised opcode %d", instruction));
                     endExecution = true;
             }
-            ip += instructionLengths.get(instruction);
+            if(!jump) {
+                ip += instructionLengths.get(instruction);
+            }
+
+            jump = false;
 
             if (endExecution) {
                 break;
