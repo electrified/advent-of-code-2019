@@ -5,7 +5,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Day5Part1 {
+public class Day5 {
     public static void main(String[] args) throws IOException, URISyntaxException {
         List<Integer> initialProgram = IntCode.loadProgram("day5input");
         IntCode computer = new IntCode();
