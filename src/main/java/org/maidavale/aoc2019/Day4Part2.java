@@ -2,9 +2,7 @@ package org.maidavale.aoc2019;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public class Day4Part2 {
     public static void main(String[] args) {

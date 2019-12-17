@@ -72,4 +72,20 @@ public class IntCodeTest {
 
         System.setIn(sysInBackup);
     }
+
+    @Test
+    public void test5() {
+        InputStream sysInBackup = System.in; // backup System.in to restore it later
+        ByteArrayInputStream in = new ByteArrayInputStream("8\n15\n".getBytes());
+        System.setIn(in);
+
+        List<Integer> initialProgram = new ArrayList<>();
+        IntCode computer = new IntCode();
+        computer.setProgram(IntCode.csvToIntList("3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,\n" +
+                "1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0"));
+        computer.runProgram();
+
+        System.setIn(sysInBackup);
+    }
+
 }
