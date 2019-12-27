@@ -20,6 +20,10 @@ public class IntCode {
 
     List<Integer> program;
 
+    IntCodeReader codeReader;
+
+    IntCodeWriter codeWriter;
+
     public IntCode() {
         instructionLengths = new HashMap<>();
         instructionLengths.put(1, 4);
@@ -31,6 +35,10 @@ public class IntCode {
         instructionLengths.put(7, 4);
         instructionLengths.put(8, 4);
         instructionLengths.put(99, 1);
+
+        ReadFromStdin rfs = new ReadFromStdin();
+        codeReader = rfs::readInteger;
+        codeWriter = System.out::println;
     }
 
     void runProgram() {
@@ -74,7 +82,7 @@ public class IntCode {
                     write( params[0], readIntegerInput());
                     break;
                 case 4:
-                    System.out.println(read(paramMode[0],params[0]));
+                    codeWriter.writeInteger(read(paramMode[0],params[0]));
                     break;
                 case 5:
                     if (read(paramMode[0], params[0]) > 0) {
@@ -139,11 +147,7 @@ public class IntCode {
         return Arrays.stream(stringProgram.split(",")).map(String::trim).map(Integer::parseInt).collect(Collectors.toList());
     }
 
-    static Integer readIntegerInput() {
-        System.out.println("Enter input:");
-        Scanner in = new Scanner(System.in);
-        Integer enteredValue = in.nextInt();
-        System.out.println(String.format("Entered value %d", enteredValue));
-        return enteredValue;
+    Integer readIntegerInput() {
+        return codeReader.readInteger();
     }
 }
