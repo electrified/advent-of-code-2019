@@ -11,10 +11,6 @@ public class Day4 {
     }
 
     public void passesRules(int lowerBound, int upperBound) {
-        //check is 6 digits long
-
-        //check within range
-
         int matchCount = 0;
 
         for(int i = lowerBound; i < upperBound; i++) {
@@ -27,7 +23,7 @@ public class Day4 {
 
     boolean passesRules(int num) {
         //going left to right digits never decrease
-        String number = new String(Integer.toString(num));
+        String number = Integer.toString(num);
 
         char[] numChars = number.toCharArray();
 
@@ -43,13 +39,9 @@ public class Day4 {
 
         Set<Integer> uniqueDigits = new HashSet<>();
         for (char numChar : numChars) {
-            uniqueDigits.add(Integer.valueOf(numChar));
+            uniqueDigits.add((int) numChar);
         }
 
-        if(uniqueDigits.size() > 5) {
-            return false;
-        }
-
-        return true;
+        return uniqueDigits.size() <= 5;
     }
 }

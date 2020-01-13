@@ -13,9 +13,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Day3Part2 {
-    private List<Set<Point>> points = new ArrayList<>();
 
     public Day3Part2() throws URISyntaxException, IOException {
+        List<Set<Point>> points = new ArrayList<>();
         points.add(new HashSet<>());
         points.add(new HashSet<>());
 
@@ -26,7 +26,7 @@ public class Day3Part2 {
 
         points.get(0).retainAll(points.get(1));
 
-        points.get(0).stream().forEach( p ->
+        points.get(0).stream().forEach(p ->
                 {
                         System.out.println(p.distanceTravelled + " " + p.x + " " + p.y);
                 }
@@ -45,7 +45,7 @@ public class Day3Part2 {
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-        Day3Part2 day3 = new Day3Part2();
+        new Day3Part2();
     }
 
     private void processLine(List<Set<Point>> points , List<String> commands, int wire) {

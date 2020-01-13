@@ -37,7 +37,7 @@ public class Day3 {
     }
 
     public static void main(String[] args) throws URISyntaxException, IOException {
-        Day3 day3 = new Day3();
+        new Day3();
     }
 
     private void processLine(List<Set<Point>> points , List<String> commands, int wire) {

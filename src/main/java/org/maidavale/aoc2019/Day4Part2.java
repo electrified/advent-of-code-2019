@@ -11,10 +11,6 @@ public class Day4Part2 {
     }
 
     public void passesRules(int lowerBound, int upperBound) {
-        //check is 6 digits long
-
-        //check within range
-
         int matchCount = 0;
 
         for(int i = lowerBound; i < upperBound; i++) {
@@ -36,7 +32,6 @@ public class Day4Part2 {
 
         for (int i = 0; i < numChars.length; i++) {
             if (numChars[i] != sortedChars[i]) {
-//                System.out.println(number + " fail!");
                 return false;
             }
         }

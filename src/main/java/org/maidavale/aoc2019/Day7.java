@@ -10,10 +10,6 @@ import java.util.List;
 import java.util.Map.Entry;
 
 public class Day7 {
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        Day7 d7 = new Day7();
-    }
-
     public Day7() throws IOException, URISyntaxException {
         List<Integer> prog = IntCode.loadProgram("day7input");
 //        List<Integer> prog = IntCode.csvToIntList("3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0");
@@ -25,8 +21,6 @@ public class Day7 {
         initialPhases.add(1);
         initialPhases.add(0);
 
-
-
         Integer max = Collections2.orderedPermutations(initialPhases).stream().map(p -> {
             Amplifier output = new Amplifier(prog, p.get(4), new Amplifier(prog, p.get(3), new Amplifier(prog, p.get(2), new Amplifier(prog, p.get(1), new Amplifier(prog, p.get(0), null)))));
             return new AbstractMap.SimpleEntry<>(output.output, p);
@@ -35,12 +29,16 @@ public class Day7 {
         System.out.println(max);
     }
 
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        new Day7();
+    }
+
     static class Amplifier {
         List<Integer> inputs = new ArrayList<>();
 
         Integer output;
 
-        public Amplifier (List<Integer> initialProgram, Integer phase, Amplifier input) {
+        public Amplifier(List<Integer> initialProgram, Integer phase, Amplifier input) {
             inputs.add(phase);
             inputs.add(input == null ? 0 : input.output);
 
@@ -59,6 +57,5 @@ public class Day7 {
         void writeOutput(Integer i) {
             this.output = i;
         }
-
     }
 }
